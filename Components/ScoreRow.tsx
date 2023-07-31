@@ -46,7 +46,7 @@ const ScoreRow:React.FC<ScoreRowProps> = ({ disabled, setDisabled, scores, setSc
 
         <>
             <DataTable.Row style={styles.container}>
-                <DataTable.Cell style={styles.cell}>Score</DataTable.Cell>
+                <DataTable.Cell style={styles.cell}> </DataTable.Cell>
                 <DataTable.Cell style={styles.cell} onPress={() => handleOnClick(0 + row)}>{scores[0 + row]}</DataTable.Cell>
                 <DataTable.Cell style={styles.cell} onPress={() => handleOnClick(1 + row)}>{scores[1 + row]}</DataTable.Cell>
                 <DataTable.Cell style={styles.cell} onPress={() => handleOnClick(2 + row)}>{scores[2 + row]}</DataTable.Cell>

@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View, Modal, TouchableOpacity } from 'react-native';
 import { FAB } from 'react-native-paper';
+import ThisModal from './ThisModal';
 
 const styles = StyleSheet.create({
     textBottom: {
@@ -11,6 +12,24 @@ const styles = StyleSheet.create({
         backgroundColor: '#ebb78f',
         marginTop: 89,
         marginBottom: 0,
+      },
+      modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      },
+      modalContent: {
+        backgroundColor: '#fff',
+        padding: 20,
+        borderRadius: 8,
+        alignItems: 'center',
+      },
+      closeButton: {
+        marginTop: 10,
+        padding: 10,
+        backgroundColor: '#eee',
+        borderRadius: 4,
       },
 });
 
@@ -23,10 +42,11 @@ type InputFieldProps = {
     setScores: React.Dispatch<React.SetStateAction<number[]>>;
     currentHole: number;
     setCurrentHole: React.Dispatch<React.SetStateAction<number>>;
+    setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const InputField: React.FC<InputFieldProps> = ({ disabled, setDisabled, pars, setPars, scores, setScores, currentHole, setCurrentHole }) => {
-    
+const InputField: React.FC<InputFieldProps> = ({ disabled, setDisabled, pars, setPars, scores, setScores, currentHole, setCurrentHole, setModalVisible }) => {
+
     const handleParIncrement = () => {
         const newPars = [...pars];
         newPars[currentHole - 1] += 1;
@@ -50,6 +70,10 @@ const InputField: React.FC<InputFieldProps> = ({ disabled, setDisabled, pars, se
         newScores[currentHole - 1] -= 1;
         setScores(newScores);
     }
+
+    const handleModalOpen = () => {
+        setModalVisible(true);
+    }
     
     return (
         <>
@@ -63,8 +87,9 @@ const InputField: React.FC<InputFieldProps> = ({ disabled, setDisabled, pars, se
             bottom: 0,
             backgroundColor: '#02b820',
           }}
-          onPress = {() => setDisabled(true)}
+          onPress = {() => { setDisabled(true); handleModalOpen(); }}
         />
+
         <Text style={{
                 fontSize: 30,
                 textAlign: 'left',

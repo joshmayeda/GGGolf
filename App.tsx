@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { FAB } from 'react-native-paper';
 import ScoreCard from './Components/ScoreCard';
 import InputField from './Components/InputField';
+import ThisModal from './Components/ThisModal';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,6 +33,8 @@ export default function App() {
   const [pars, setPars] = React.useState([3,4,5,3,4,5,3,4,5,3,4,5,3,4,5,3,4,5]);
   const [scores, setScores] = React.useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
 
+  const [modalVisible, setModalVisible] = React.useState(false);
+
   return (
     <View style={styles.container}>
       <Text style={styles.textTop}>G(it) G(ud) Golf</Text>
@@ -55,7 +58,10 @@ export default function App() {
         setScores={setScores}
         currentHole={currentHole}
         setCurrentHole={setCurrentHole}
+        setModalVisible={setModalVisible}
       />}
+
+      <ThisModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
       
     </View>
   );
