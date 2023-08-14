@@ -34,6 +34,7 @@ export default function App() {
   const [pars, setPars] = React.useState([3,4,5,3,4,5,3,4,5,3,4,5,3,4,5,3,4,5]);
   const [scores, setScores] = React.useState([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
   const [confirmed, setConfirmed] = React.useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+  const [scoreName, setScoreName] = React.useState('');
 
   const [modalVisible, setModalVisible] = React.useState(false);
 
@@ -65,9 +66,14 @@ export default function App() {
         confirmed={confirmed}
         setConfirmed={setConfirmed}
         setCompleteScorecard={setCompleteScorecard}
+        setScoreName={setScoreName}
       />}
 
-      <ThisModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+      <ThisModal 
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        scoreName={scoreName}
+      />
 
       {completedScorecard ? 
         <Button

@@ -46,9 +46,10 @@ type InputFieldProps = {
     confirmed: number[];
     setConfirmed: React.Dispatch<React.SetStateAction<number[]>>;
     setCompleteScorecard: React.Dispatch<React.SetStateAction<boolean>>;
+    setScoreName: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const InputField: React.FC<InputFieldProps> = ({ disabled, setDisabled, pars, setPars, scores, setScores, currentHole, setCurrentHole, setModalVisible, confirmed, setConfirmed, setCompleteScorecard }) => {
+const InputField: React.FC<InputFieldProps> = ({ disabled, setDisabled, pars, setPars, scores, setScores, currentHole, setCurrentHole, setModalVisible, confirmed, setConfirmed, setCompleteScorecard, setScoreName }) => {
 
     const handleParIncrement = () => {
         const newPars = [...pars];
@@ -84,6 +85,24 @@ const InputField: React.FC<InputFieldProps> = ({ disabled, setDisabled, pars, se
     }
 
     const handleModalOpen = () => {
+        if(pars[currentHole - 1] - scores[currentHole - 1] === 0){
+            setScoreName('Par');
+        } else if(pars[currentHole - 1] - scores[currentHole - 1] === 1){
+            setScoreName('Birdie');
+        } else if(pars[currentHole - 1] - scores[currentHole - 1] === 2){
+            setScoreName('Eagle');
+        } else if(pars[currentHole - 1] - scores[currentHole - 1] === 3){
+            setScoreName('Albatross');
+        } else if(pars[currentHole - 1] - scores[currentHole - 1] === -1){
+            setScoreName('Bogey');
+        } else if(pars[currentHole - 1] - scores[currentHole - 1] === -2){
+            setScoreName('Double Bogey');
+        } else if(pars[currentHole - 1] - scores[currentHole - 1] === -3){
+            setScoreName('Triple Bogey');
+        } else {
+            let num:number = Math.abs(pars[currentHole - 1] - scores[currentHole - 1]);
+            setScoreName("+" + num.toString());
+        }
         setModalVisible(true);
     }
     
@@ -158,7 +177,7 @@ const InputField: React.FC<InputFieldProps> = ({ disabled, setDisabled, pars, se
             <FAB
             icon="minus"
             size='small'
-            onPress={handleParDecrement}
+            onPress={handleScoreDecrement}
             style={{
                 position: 'absolute',
                 bottom: 85,
