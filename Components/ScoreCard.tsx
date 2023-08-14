@@ -33,9 +33,10 @@ type ScoreCardProps = {
     setScores: React.Dispatch<React.SetStateAction<number[]>>;
     currentHole: number;
     setCurrentHole: React.Dispatch<React.SetStateAction<number>>;
+    confirmed: number[];
 }
 
-const ScoreCard:React.FC<ScoreCardProps> = ({ disabled, setDisabled, pars, setPars, scores, setScores, currentHole, setCurrentHole }) => {
+const ScoreCard:React.FC<ScoreCardProps> = ({ disabled, setDisabled, pars, setPars, scores, setScores, currentHole, setCurrentHole, confirmed }) => {
 
     return (
             <DataTable style={styles.table}>
@@ -67,6 +68,7 @@ const ScoreCard:React.FC<ScoreCardProps> = ({ disabled, setDisabled, pars, setPa
                     row={0}
                     currentHole={currentHole}
                     setCurrentHole={setCurrentHole}
+                    confirmed={confirmed}
                 />
 
                 <DataTable.Row style={styles.container}>
@@ -96,6 +98,7 @@ const ScoreCard:React.FC<ScoreCardProps> = ({ disabled, setDisabled, pars, setPa
                     row={9}
                     currentHole={currentHole}
                     setCurrentHole={setCurrentHole}
+                    confirmed={confirmed}
                 />
 
             </DataTable>

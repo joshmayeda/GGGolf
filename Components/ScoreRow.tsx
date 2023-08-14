@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRightWidth: 1,
         borderRightColor: '#000000',
-        
     },
     modal: {
         flex: 1,
@@ -31,9 +30,10 @@ type ScoreRowProps = {
     row: number;
     currentHole: number;
     setCurrentHole: React.Dispatch<React.SetStateAction<number>>;
+    confirmed: number[];
 }
 
-const ScoreRow:React.FC<ScoreRowProps> = ({ disabled, setDisabled, scores, setScores, row, currentHole, setCurrentHole }) => {
+const ScoreRow:React.FC<ScoreRowProps> = ({ disabled, setDisabled, scores, setScores, row, currentHole, setCurrentHole, confirmed }) => {
 
     const handleOnClick = (id: number) => {
         setDisabled(false);

@@ -43,9 +43,12 @@ type InputFieldProps = {
     currentHole: number;
     setCurrentHole: React.Dispatch<React.SetStateAction<number>>;
     setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+    confirmed: number[];
+    setConfirmed: React.Dispatch<React.SetStateAction<number[]>>;
+    setCompleteScorecard: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const InputField: React.FC<InputFieldProps> = ({ disabled, setDisabled, pars, setPars, scores, setScores, currentHole, setCurrentHole, setModalVisible }) => {
+const InputField: React.FC<InputFieldProps> = ({ disabled, setDisabled, pars, setPars, scores, setScores, currentHole, setCurrentHole, setModalVisible, confirmed, setConfirmed, setCompleteScorecard }) => {
 
     const handleParIncrement = () => {
         const newPars = [...pars];
@@ -71,6 +74,15 @@ const InputField: React.FC<InputFieldProps> = ({ disabled, setDisabled, pars, se
         setScores(newScores);
     }
 
+    const handleConfirm = () => {
+        const newConfirmed = [...confirmed];
+        newConfirmed[currentHole - 1] = 1;
+        setConfirmed(newConfirmed);
+        if(newConfirmed.every(item => item !== 0)){
+            setCompleteScorecard(true);
+        }
+    }
+
     const handleModalOpen = () => {
         setModalVisible(true);
     }
@@ -87,7 +99,7 @@ const InputField: React.FC<InputFieldProps> = ({ disabled, setDisabled, pars, se
             bottom: 0,
             backgroundColor: '#02b820',
           }}
-          onPress = {() => { setDisabled(true); handleModalOpen(); }}
+          onPress = {() => { setDisabled(true); handleConfirm(); handleModalOpen(); }}
         />
 
         <Text style={{
@@ -142,17 +154,18 @@ const InputField: React.FC<InputFieldProps> = ({ disabled, setDisabled, pars, se
                 marginLeft: 25,
         }}
         >Strokes: </Text>
-        <FAB
-        icon="minus"
-        size='small'
-        onPress={handleScoreDecrement}
-        style={{
-            position: 'absolute',
-            bottom: 85,
-            left: 130,
-            backgroundColor: '#fff',
-        }}
-        />
+        {(scores[currentHole - 1] > 1) ?
+            <FAB
+            icon="minus"
+            size='small'
+            onPress={handleParDecrement}
+            style={{
+                position: 'absolute',
+                bottom: 85,
+                left: 130,
+                backgroundColor: '#fff',
+            }}
+        /> : null}
         {(scores[currentHole - 1] > pars[currentHole - 1]) ?
         <Text style={{
             fontSize: 30,

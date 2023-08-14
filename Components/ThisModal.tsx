@@ -24,6 +24,7 @@ const ThisModal:React.FC<ThisModalProps> = ({ modalVisible, setModalVisible }) =
             <View>
                 <View>
                     <IconButton iconColor="#f70202" containerColor="#fff" style={styles.modalCloseButton} icon="alpha-x-circle" mode="contained" onPress={() => setModalVisible(false)}></IconButton>
+                    
                 </View>
             </View>
         </Modal>
