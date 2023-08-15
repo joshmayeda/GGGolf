@@ -1,4 +1,7 @@
 const axios = require('axios');
+require('dotenv').config();
+
+const apiKey = process.env.API_KEY;
 
 let num = Math.floor(Math.random() * 635) + 1;
 
@@ -9,8 +12,8 @@ const apiURL = `https://golf-leaderboard-data.p.rapidapi.com/leaderboard/25`;
 
 const options = {
   headers: {
-    'X-RapidAPI-Key': '0edbbb1828mshabaf2ae7517d0bep15b362jsn5232fdb8fbdc',
-    'X-RapidAPI-Host': 'golf-leaderboard-data.p.rapidapi.com'
+    'X-RapidAPI-Key': process.env.API_KEY,
+    'X-RapidAPI-Host': process.env.API_HOST
   }
 };
 
