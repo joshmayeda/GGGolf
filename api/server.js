@@ -1,8 +1,6 @@
 const axios = require('axios');
 require('dotenv').config();
 
-const apiKey = process.env.API_KEY;
-
 let num = Math.floor(Math.random() * 635) + 1;
 
 //range 1-635
